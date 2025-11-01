@@ -22,9 +22,9 @@ thread awaits{
      }
      //isnt used, but gotta stay active not to exit the thread before synced back
     coroutine "thread" each 1000{
-        //this thread returns "" when bussy ,so it wont holdup the mainthread.
-        //keep it alive so the mainthread can check it, and send it exit to close when callback is called.
-    }
+        if timerdiff(closethreadtimer) > 999{
+            break self
+        }
 }
 class awaits{
     func async(function,callback,arg1,arg2,arg3,arg4,arg5,arg6,arg7){
